@@ -41,6 +41,12 @@ class SearchViewController: UIViewController {
   func updateSearchResults(data: NSData?) {
     searchResults.removeAll()
     do {
+        if let data = data {
+            let str = String(data:data, encoding:NSUTF8StringEncoding)
+            print("\(str)")
+        }
+        
+        
       if let data = data, response = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions(rawValue:0)) as? [String: AnyObject] {
         
         // Get the results array
@@ -167,6 +173,7 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
         }
+    dataTask?.resume()
     }
   }
     
